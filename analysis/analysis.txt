@@ -1,4 +1,4 @@
-YOUR NAME and YOUR NETID
+Geoff Gaugler gg102
 
 Run WordGramDriver for wordgrams of size 2-10 and record
 the number of WordGram values/objects that occur more than
@@ -15,13 +15,13 @@ values of WSIZE
 WSIZE    # duplicates
 2        60,453
 3        10,756
-4
-5
-6
-7
-8
-9
-10
+4		 177618 - 175631 = 1,987
+5		 177610 - 176943 = 667
+6		 177602 - 177240 = 362
+7		 177594 - 177368 = 226
+8		 177586 - 177435 = 151 
+9		 177578 - 177473 = 105
+10		 177570 - 177497 = 73
 
 =====
 Explain in your own words the conceptual differences between 
@@ -31,10 +31,19 @@ Answer these questions:
 (1) Why the results of these methods should be the same in 
 terms of changes made to the HashSet parameter passed to each method.
 
+Because in the end both methods create the same final set, they just go about doing it different ways.
+
 (2) What are the conceptual differences between the two
 benchmarking methods
+
+benchmark reads a text file and makes wordgrams of the specified size as it goes along. 
+benchmarkShift reads a text file and each word it comes across it shifts all of the 
+words down and adds a new word to the end of the wordgram.
 
 (3) Is the total amount of memory allocated for arrays
 the same or different in the two methods? Account for
 arrays created in the methods and arrays created by
 WordGram objects. Try to be quantitative in answering.
+
+the benchmarkShift methods creates more wordgrams than the other method, which in turn creates more arrays, so the shift method will use far more 
+memory for the allocation of arrays than the benchmark method.

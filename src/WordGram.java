@@ -1,9 +1,10 @@
+import java.util.Arrays;
 
 /**
  * A WordGram represents a sequence of strings
  * just as a String represents a sequence of characters
  * 
- * @author YOUR NAME HERE
+ * @author Geoff Gaugler
  *
  */
 public class WordGram {
@@ -20,10 +21,12 @@ public class WordGram {
 	 */
 	public WordGram(String[] source, int start, int size) {
 		myWords = new String[size];
-		myToString = "";
-		myHash = 5;
-		
-		// TODO: initialize myWords and others as needed
+		for (int i = 0; i < size; i++)
+		{
+			myWords[i] = source[start + i];
+		}
+		myToString = null;
+		myHash = 0;
 	}
 
 	/**
@@ -39,28 +42,32 @@ public class WordGram {
 	}
 
 	/**
-	 * Complete this comment
-	 * @return
+	 *
+	 * @return the number of words in the instance variable myWords
 	 */
-	public int length(){
-		// TODO: change this
-		return 0;
+	public int length()
+	{
+		return myWords.length;
 	}
-
 
 	@Override
 	public boolean equals(Object o) {
 		if (! (o instanceof WordGram) || o == null){
 			return false;
 		}
-
-	    // TODO: complete this method
+		WordGram wg = (WordGram) o;
+		if (!Arrays.equals(this.myWords, wg.myWords))
+		{
+			return false;
+		}
 		return true;
 	}
 
 	@Override
-	public int hashCode(){
-		// TODO: complete this method
+	public int hashCode()
+	{
+		if(myHash == 0)
+			myHash = this.toString().hashCode();
 		return myHash;
 	}
 	
@@ -68,17 +75,25 @@ public class WordGram {
 	/**
 	 * Create and complete this comment
 	 * @param last is last String of returned WordGram
-	 * @return
+	 * @return a new WordGram object with k entries where k is the order of this WordGram
+	 * whose first k-1 entries are the same as the last k-1 entries of this WordGram and whose
+	 * last entry is the parameter last.
 	 */
 	public WordGram shiftAdd(String last) {
 		WordGram wg = new WordGram(myWords,0,myWords.length);
-		// TODO: Complete this method
+		for (int i = 1; i < myWords.length; i++)
+		{
+			wg.myWords[i-1] = this.myWords[i];
+		}
+		wg.myWords[wg.length() - 1] = last;
 		return wg;
 	}
 
 	@Override
-	public String toString(){
-		// TODO: Complete this method	
+	public String toString()
+	{
+		if(myToString == null)
+			myToString = String.join(" ", myWords);
 		return myToString;
 	}
 }
